@@ -23,9 +23,15 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/register").permitAll()
+                        .requestMatchers("/api/auth/login").permitAll()
+                        .requestMatchers("/api/auth/oauth2/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .httpBasic(basic -> {});
+                .httpBasic(basic -> {})
+                .oauth2Login(oauth2 -> oauth2
+                        .defaultSuccessUrl("/api/auth/oauth2/success", true)
+                        .failureUrl("/api/auth/oauth2/failure")
+                );
 
         return http.build();
     }

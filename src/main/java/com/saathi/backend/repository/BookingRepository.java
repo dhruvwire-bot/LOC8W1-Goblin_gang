@@ -21,4 +21,11 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
             User customer,
             List<Booking.Status> statuses
     );
+
+    // get completed bookings for a specific worker
+    List<Booking> findByWorker_User_EmailAndStatus(
+            String email,
+            Booking.Status status
+    );
+
 }

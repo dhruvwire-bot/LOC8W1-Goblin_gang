@@ -20,9 +20,7 @@ public class WorkerProfile {
     @JoinColumn(name = "user_id")
     private User user;
 
-    // stored as "PLUMBER,ELECTRICIAN" — matched from Gemini response
     private String skills;
-
     private String city;
     private Double latitude;
     private Double longitude;
@@ -33,4 +31,9 @@ public class WorkerProfile {
 
     private Integer jobsCompleted;
     private Double pricePerHour;
+
+    // NEW
+    private Boolean isVerified;          // true = verified badge shown
+    private String aadhaarNumber;        // last 4 digits only for display
+    private String verificationStatus;  // PENDING / APPROVED / REJECTED
 }

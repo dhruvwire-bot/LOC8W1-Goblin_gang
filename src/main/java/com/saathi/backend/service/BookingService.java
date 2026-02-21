@@ -46,12 +46,14 @@ public class BookingService {
                 .sorted((a, b) -> Double.compare(b.getRating(), a.getRating()))
                 .map(w -> WorkerSummary.builder()
                         .workerId(w.getId())
+                        .userId(w.getUser().getId())
                         .name(w.getUser().getName())
                         .skills(w.getSkills())
                         .city(w.getCity())
                         .rating(w.getRating())
                         .jobsCompleted(w.getJobsCompleted())
                         .pricePerHour(w.getPricePerHour())
+                        .isVerified(Boolean.TRUE.equals(w.getIsVerified()))  // NEW
                         .build()
                 )
                 .collect(Collectors.toList());
