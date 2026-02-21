@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "name": "Service Saathi",
+    "slug": "service-saathi",
+    "version": "2.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": { "backgroundColor": "#FF6B00" },
+    "ios": { "supportsTablet": false, "bundleIdentifier": "com.servicesaathi.app" },
+    "android": { "package": "com.servicesaathi.app", "adaptiveIcon": { "backgroundColor": "#FF6B00" } }
+  }
+}
