@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: saathi-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: saathi123
+      MYSQL_DATABASE: service_saathi
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 5
+
+  backend:
+    build: .
+    container_name: saathi-backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/service_saathi?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: saathi123
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_OPEN_IN_VIEW: false
+      GEMINI_API_KEY: AIzaSyAWo-hoh1D-778fCUq3saxPWKqKw1uI6jA
+      GEMINI_API_URL: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+volumes:
+  mysql-data:
